@@ -1,0 +1,19 @@
+Extensions installed on Codespaces: bug-free space cod:
+github.codespaces
+github.vscode-pull-request-github
+ms-azuretools.azure-dev
+ms-azuretools.vscode-azureappservice
+ms-azuretools.vscode-azurecontainerapps
+ms-azuretools.vscode-azurefunctions
+ms-azuretools.vscode-azureresourcegroups
+ms-azuretools.vscode-azurestaticwebapps
+ms-azuretools.vscode-azurestorage
+ms-azuretools.vscode-azurevirtualmachines
+ms-azuretools.vscode-cosmosdb
+ms-mssql.data-workspace-vscode
+ms-mssql.mssql
+ms-mssql.sql-bindings-vscode
+ms-mssql.sql-database-projects-vscode
+ms-vscode.azure-account
+ms-vscode.azurecli
+ms-vscode.vscode-node-azure-pack
