@@ -4,3 +4,9 @@ az login --tenant 04c3bebe-aa37-4307-8e90-7df3621370b8
 az ad signed-in-user show
 
 Server=sql-jfv.database.windows.net;Initial Catalog=tcDataAccess;Persist Security Info=False;User ID=jamesvac@microsoft.com;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication="Active Directory Integrated";
+
+dotnet new classlib -o DataAccessLibrary
+
+dotnet add package Dapper --version 2.1.28
+dotnet add package Microsoft.Extensions.Configuration.Abstractions --version 8.0.0
+dotnet add package Microsoft.Data.SqlClient --version 5.2.0
