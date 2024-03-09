@@ -1,4 +1,4 @@
-﻿using NameSpace.DataAccessLibrary.Models;
+﻿using DataAccessLibrary.Models;
 
 namespace DataAccessLibrary.Data;
 

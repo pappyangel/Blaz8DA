@@ -1,4 +1,4 @@
-namespace NameSpace.DataAccessLibrary.Models;
+namespace DataAccessLibrary.Models;
 
     public class PersonModel
     {
