@@ -2,7 +2,7 @@
 
 namespace DataAccessLibrary.Data;
 
-public class PeopleData
+public class PeopleData : IPeopleData
 {
     private readonly ISqlDataAccess _sql;
 
