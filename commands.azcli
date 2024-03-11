@@ -14,5 +14,9 @@ dotnet add package Microsoft.Data.SqlClient --version 5.2.0
 dotnet new blazor -au none -int Server -o DataAccessDemo
 
 dotnet add reference ../DataAccessLibrary/DataAccessLibrary.csproj
+dotnet sln add todo-app/todo-app.csproj
+
+dotnet new sln -n DataAccessSln
+dotnet sln DataAccessSln.sln add DataAccessDemo.csproj
 
   
