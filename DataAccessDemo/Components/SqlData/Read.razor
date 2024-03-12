@@ -18,7 +18,7 @@ else
 }
 
 @* <button class="btn btn-outline-primary my-3" @onclick="RefreshPeople" type="button">Refresh People</button> *@
-<button class="styled" @onclick="RefreshPeople" type="button">Refresh People</button>
+<button class="styled" @onclick="RefreshData" type="button">Refresh People</button>
 <button class="btn btn-danger" type="button">Bootstrap Button</button>
 
 
@@ -29,10 +29,10 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await RefreshPeople();
+        await RefreshData();
     }
 
-    private async Task RefreshPeople()
+    private async Task RefreshData()
     {
         people = null;
         // Simulate asynchronous loading to demonstrate streaming rendering
