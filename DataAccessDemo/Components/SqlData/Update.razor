@@ -1,0 +1,69 @@
+@rendermode InteractiveServer
+@inject IPeopleData sql;
+
+<h3 class="mb-3">Update Person</h3>
+
+@if (people is null)
+{
+    <p>
+        Loading...
+    </p>
+}
+else
+{
+    <EditForm Model="selectedPersonId" method="post" FormName="updatePersonForm" OnValidSubmit="LoadPersonToUpdate">
+        <InputSelect @bind-Value="selectedPersonId.Id" class="form-control">
+            @foreach (var person in people)
+                {
+                    <option value="@person.Id">@person.FirstName @person.LastName </option>
+                }
+        </InputSelect>
+    </EditForm>
+
+    @if (personToUpdate is not null)
+    {
+        <h1> Found @personToUpdate.FirstName @personToUpdate.LastName</h1>
+    }
+
+}
+
+
+    @code {
+        private IEnumerable<PersonModel>? people;
+        private PersonModel? personToUpdate;
+        private SelectedPersonIdModel selectedPersonId = new();
+        private class SelectedPersonIdModel
+        {    
+            public int Id { get; set; }
+         
+        }
+        protected override async Task OnInitializedAsync()
+        {
+        await RefreshPeople();
+        }
+
+        private void LoadPersonToUpdate()
+        {
+        var foundPerson = people.Where(p => p.Id == selectedPersonId.Id).FirstOrDefault();
+            
+            if (foundPerson is not null)
+            {
+                personToUpdate = new();
+                personToUpdate.Id = foundPerson.Id;
+                personToUpdate.FirstName = foundPerson.FirstName;
+                personToUpdate.LastName = foundPerson.LastName;
+                @* personToUpdate = foundPerson; *@
+            }
+        
+        }
+
+        private async Task RefreshPeople()
+        {
+        people = null;
+        // Simulate asynchronous loading to demonstrate streaming rendering
+        await Task.Delay(500);
+        people = await sql.GetAllPeople();
+        }
+
+
+    }
