@@ -28,7 +28,7 @@ else
     <ValidationSummary />
     <div class="mb-3">
         <label>Id:</label>
-        <Span>@personToUpdate.Id</Span>
+        <span>@personToUpdate.Id</span>
     </div>
     <div class="mb-3">
         <label>First Name:</label>
@@ -58,12 +58,12 @@ else
         }
         protected override async Task OnInitializedAsync()
         {
-        await RefreshPeople();
+        await RefreshData();
         }
 
         private void LoadPersonToUpdate()
         {
-        var foundPerson = people.Where(p => p.Id == selectedPersonId.Id).FirstOrDefault();
+        var foundPerson = people!.Where(p => p.Id == selectedPersonId.Id).FirstOrDefault();
             
             if (foundPerson is not null)
             {
@@ -76,7 +76,7 @@ else
         
         }
 
-        private async Task RefreshPeople()
+        private async Task RefreshData()
         {
         people = null;
         // Simulate asynchronous loading to demonstrate streaming rendering
@@ -86,10 +86,10 @@ else
 
     private async Task UpdatePersonAsync()
     {
-        await sql.UpdatePerson(personToUpdate);
+        await sql.UpdatePerson(personToUpdate!);
         personToUpdate = null;
         selectedPersonId.Id = 0;
-        await RefreshPeople();
+        await RefreshData();
 
     }
     }
