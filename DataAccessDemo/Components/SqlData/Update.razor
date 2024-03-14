@@ -11,18 +11,37 @@
 }
 else
 {
-    <EditForm Model="selectedPersonId" method="post" FormName="updatePersonForm" OnValidSubmit="LoadPersonToUpdate">
+    <EditForm Model="selectedPersonId" method="post" FormName="selectPersonForm" OnValidSubmit="LoadPersonToUpdate">
         <InputSelect @bind-Value="selectedPersonId.Id" class="form-control">
             @foreach (var person in people)
                 {
                     <option value="@person.Id">@person.FirstName @person.LastName </option>
                 }
         </InputSelect>
+         <button type="submit" class="btn btn-outline-primary my-3">Select to Edit</button>
     </EditForm>
 
     @if (personToUpdate is not null)
     {
-        <h1> Found @personToUpdate.FirstName @personToUpdate.LastName</h1>
+        <EditForm Model="personToUpdate" method="post" FormName="updatePersonForm" OnValidSubmit="UpdatePersonAsync">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label>Id:</label>
+        <Span>@personToUpdate.Id</Span>
+    </div>
+    <div class="mb-3">
+        <label>First Name:</label>
+        <InputText @bind-Value="personToUpdate.FirstName" />
+    </div>
+    <div class="mb-3">
+        <label>Last Name:</label>
+        <InputText @bind-Value="personToUpdate.LastName" />
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary">Update</button>
+
+</EditForm>
     }
 
 }
@@ -65,5 +84,12 @@ else
         people = await sql.GetAllPeople();
         }
 
+    private async Task UpdatePersonAsync()
+    {
+        await sql.UpdatePerson(personToUpdate);
+        personToUpdate = null;
+        selectedPersonId.Id = 0;
+        await RefreshPeople();
 
+    }
     }
