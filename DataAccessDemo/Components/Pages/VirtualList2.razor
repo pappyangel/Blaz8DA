@@ -1,0 +1,33 @@
+@page "/VirtualList2"
+@rendermode InteractiveServer
+
+
+<h3>VirtualList2</h3>
+
+<Virtualize Items="people" Context="person">
+    <ItemContent>
+        <p style="font-size:26px;">
+            @person.FirstName @person.LastName
+        </p>    
+    </ItemContent>
+    <EmptyContent>
+        <p style="font-size:26px;">
+            No items to display
+        </p>        
+    </EmptyContent>
+</Virtualize>
+
+
+
+
+@code{
+    private List<PersonModel> people = new();
+
+    protected override void OnInitialized()
+    {
+        for (int i = 0; i < 500; i++)
+        {
+            people.Add(new() { FirstName = $"First {i}", LastName = $"Last {i}" });
+        }
+    }
+}

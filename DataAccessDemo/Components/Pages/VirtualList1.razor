@@ -1,0 +1,27 @@
+@page "/VirtualList1"
+@rendermode InteractiveServer
+
+
+<h3>VirtualList</h3>
+
+@foreach (var person in people)
+{
+    <p style="font-size:26px;">
+        @person.FirstName @person.LastName
+    </p>
+}
+
+
+
+
+@code{
+    private List<PersonModel> people = new();
+
+    protected override void OnInitialized()
+    {
+        for (int i = 0; i < 500; i++)
+        {
+            people.Add(new() { FirstName = $"First {i}", LastName = $"Last {i}" });
+        }
+    }
+}
