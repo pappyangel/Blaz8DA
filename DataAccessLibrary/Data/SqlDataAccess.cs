@@ -14,7 +14,7 @@ public class SqlDataAccess : ISqlDataAccess
         _config = config;
     }
 
-    public async Task<IEnumerable<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionStringName="Default")
+    public async Task<IEnumerable<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionStringName= "SQLAzure")
     {
         string? connectionString = _config.GetConnectionString(connectionStringName);
 
@@ -25,7 +25,7 @@ public class SqlDataAccess : ISqlDataAccess
         return rows;
     }
 
-    public async Task SaveDataAsync<T>(string storedProcedure, T parameters, string connectionStringName="Default")
+    public async Task SaveDataAsync<T>(string storedProcedure, T parameters, string connectionStringName= "SQLAzure")
     {
         string? connectionString = _config.GetConnectionString(connectionStringName);
 
