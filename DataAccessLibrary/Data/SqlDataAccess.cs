@@ -14,9 +14,18 @@ public class SqlDataAccess : ISqlDataAccess
         _config = config;
     }
 
-    public async Task<IEnumerable<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionStringName= "SQLAzure")
+    public async Task<IEnumerable<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionStringName= "Default")
     {
         string? connectionString = _config.GetConnectionString(connectionStringName);
+
+        var passwordInSecrets = _config.GetSection("SQLAzurePW");  
+
+        if (passwordInSecrets.Exists())
+        {
+            var conStrBuilder = new SqlConnectionStringBuilder(_config.GetConnectionString(connectionStringName));
+            conStrBuilder.Password = _config["SQLAzurePW"];
+            connectionString = conStrBuilder.ConnectionString;
+        }
 
         using IDbConnection connection = new SqlConnection(connectionString);
 
@@ -28,6 +37,15 @@ public class SqlDataAccess : ISqlDataAccess
     public async Task SaveDataAsync<T>(string storedProcedure, T parameters, string connectionStringName= "SQLAzure")
     {
         string? connectionString = _config.GetConnectionString(connectionStringName);
+
+        var passwordInSecrets = _config.GetSection("SQLAzurePW");
+
+        if (passwordInSecrets.Exists())
+        {
+            var conStrBuilder = new SqlConnectionStringBuilder(_config.GetConnectionString(connectionStringName));
+            conStrBuilder.Password = _config["SQLAzurePW"];
+            connectionString = conStrBuilder.ConnectionString;
+        }
 
         using IDbConnection connection = new SqlConnection(connectionString);
 

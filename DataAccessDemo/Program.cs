@@ -11,11 +11,6 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<IPeopleData, PeopleData>();
 
-var conStrBuilder = new SqlConnectionStringBuilder(
-        builder.Configuration.GetConnectionString("SQLAzure"));
-conStrBuilder.Password = builder.Configuration["SQLAzurePW"];
-var connection = conStrBuilder.ConnectionString;
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
