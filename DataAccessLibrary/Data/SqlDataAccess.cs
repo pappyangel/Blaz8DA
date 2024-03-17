@@ -34,7 +34,7 @@ public class SqlDataAccess : ISqlDataAccess
         return rows;
     }
 
-    public async Task SaveDataAsync<T>(string storedProcedure, T parameters, string connectionStringName= "SQLAzure")
+    public async Task SaveDataAsync<T>(string storedProcedure, T parameters, string connectionStringName= "Default")
     {
         string? connectionString = _config.GetConnectionString(connectionStringName);
 

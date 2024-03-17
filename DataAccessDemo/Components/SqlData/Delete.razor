@@ -35,6 +35,16 @@ else
     {
         await RefreshData();
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            //await RefreshData();
+        }
+            
+    }
+
     private async Task RefreshData()
     {
         people = null;
@@ -48,7 +58,7 @@ else
         await sql.DeletePerson(selectedPersonId.Id);
         @* selectedPersonId.Id = 0; *@
         selectedPersonId = new();
-        await RefreshData();
+        await RefreshData();        
         
     }
 }
